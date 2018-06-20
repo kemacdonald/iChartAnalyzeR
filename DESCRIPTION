@@ -1,0 +1,20 @@
+Package: iChartAnalyzeR
+Type: Package
+Title: Analyze PEEK Data iChart Style
+Version: 0.1.0
+Author: Kyle MacDonald
+Maintainer: Kyle MacDonald <kylem412@gmail.com>
+Description: The iChartAnalyzeR package provides a set of functions 
+    for reading, aggregating, and plotting Tobii eyetracking data in R. 
+    These functions are designed specificially for the analysis workflow of 
+    the Language Learning Lab at Stanford.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    reshape,
+    utils,
+    grid,
+    ggplot2,
+    grDevices
+RoxygenNote: 6.0.1
