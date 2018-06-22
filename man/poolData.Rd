@@ -4,20 +4,22 @@
 \alias{poolData}
 \title{Pool Data}
 \usage{
-poolData(iChart, RejectFirstGap = FALSE, RejectLongestGap = FALSE,
-  RejectRT = FALSE, dependent = "Accuracy", group = "", paired = TRUE,
-  save_results = FALSE)
+poolData(iChart, dependent = "Accuracy", include_T_initial = FALSE,
+  RejectFirstGap = FALSE, RejectLongestGap = FALSE, RejectRT = FALSE,
+  group = "", paired = TRUE, save_results = FALSE)
 }
 \arguments{
 \item{iChart}{A data frame in iChart format with iChart column names.}
+
+\item{dependent}{A string indicating which dependent measure to use (Accuracy or RT).}
+
+\item{include_T_initial}{A boolean indicating whether Target-initial trials should be included in RT computation.}
 
 \item{RejectFirstGap}{A boolean indicating whether bad first gaps should be filtered out of the computation.}
 
 \item{RejectLongestGap}{A boolean indicating whether bad longest gaps should be filtered out of the computation.}
 
 \item{RejectRT}{A boolean indicating whether bad RTs should be filtered out of the computation.}
-
-\item{dependent}{A string indicating which dependent measure to use (Accuracy or RT).}
 
 \item{group}{A string indicating the variable name for any grouping variables (e.g., conditions).}
 

@@ -13,7 +13,7 @@
 #' @examples
 #' \dontrun{d <- computeStatistics(iChart, startWindow=0, endWindow=3000, save_results = TRUE)}
 
-computeStatistics <- function(iChart, startWindow = 300, endWindow = 3000, save_results = F) {
+computeStatistics <- function(iChart, startWindow = 300, endWindow = 3000, save_results = TRUE) {
   iChart$StartWindowRT <- rep(startWindow, nrow(iChart))
   iChart$EndWindowRT <- rep(endWindow, nrow(iChart))
   iChart$StartWindowAcc <- rep(startWindow, nrow(iChart))

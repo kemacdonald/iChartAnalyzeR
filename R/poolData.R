@@ -5,10 +5,11 @@
 #'
 #' @description \code{poolData()} computes the mean accuracy or RT for each each participant and condition.
 #' @param iChart A data frame in iChart format with iChart column names.
+#' @param dependent A string indicating which dependent measure to use (Accuracy or RT).
+#' @param include_T_initial A boolean indicating whether Target-initial trials should be included in RT computation.
 #' @param RejectFirstGap A boolean indicating whether bad first gaps should be filtered out of the computation.
 #' @param RejectLongestGap A boolean indicating whether bad longest gaps should be filtered out of the computation.
 #' @param RejectRT A boolean indicating whether bad RTs should be filtered out of the computation.
-#' @param dependent A string indicating which dependent measure to use (Accuracy or RT).
 #' @param group A string indicating the variable name for any grouping variables (e.g., conditions).
 #' @param paired A boolean indicating whether the computation should be done over paired data.
 #' @param save_results A boolean indicating whether the results should be saved to disk.
@@ -19,10 +20,11 @@
 #'
 
 poolData <- function(iChart,
+                     dependent = "Accuracy",
+                     include_T_initial = FALSE,
                      RejectFirstGap = FALSE,
                      RejectLongestGap =FALSE,
                      RejectRT =FALSE,
-                     dependent = "Accuracy",
                      group = "",
                      paired = TRUE,
                      save_results = FALSE) {
@@ -31,7 +33,12 @@ poolData <- function(iChart,
   GoodLongestGap <- RejectLongestGap
   GoodRT <- RejectRT
 
-  iChart <- iChart[iChart$Response == "D" | iChart$Response == "T",]
+  if(include_T_initial) {
+    iChart <- iChart[iChart$Response == "D" | iChart$Response == "T",]
+  } else {
+    iChart <- iChart[iChart$Response == "D",]
+  }
+
   # this line controls which dependent measure goes into pooling computation
   dep <- which(names(iChart)==dependent)
   iChart$Accuracy <- iChart[,dep]

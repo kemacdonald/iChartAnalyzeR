@@ -12,9 +12,14 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
+    tidyselect,
     reshape,
     utils,
     grid,
     ggplot2,
-    grDevices
+    grDevices,
+    dplyr,
+    magrittr,
+    readr,
+    purrr
 RoxygenNote: 6.0.1

@@ -35,6 +35,6 @@ This function generates two types of plots for PEEK data: Profile Plots and Onse
 \examples{
 \dontrun{acc <- createPlots(d, startWindow=0, endWindow=3000,
   RejectFirstGap=FALSE, RejectLongestGap=FALSE, RejectRT=FALSE,
-  plotStats = "PP", group = "", save_results = TRUE)}
+  plotStats = "PP", group = "")}
 
 }

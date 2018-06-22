@@ -6,7 +6,8 @@ Language Learning Lab at Stanford University.
 
 ## Setup
 
-### Install Rtobii
+### Install iChartAnalyzeR
+
 Install `iChartAnalyzeR` from this GitHub repository:
 
 ```S
@@ -25,9 +26,8 @@ library(iChartAnalyzeR)
 
 # Read and Preprocess iChart
 d <- readiChart(iChartFile = "Habla2_25_iChart_wide.txt") 
-d <- computeStatistics(d, startWindow=0, endWindow=1800, save_results = TRUE)  
-d <- filteriChart(d, minRT=300, maxRT=1800, maxfirstgap=15, 
-                  maxlonggap=15, save_results = TRUE)
+d <- computeStatistics(d, startWindow=0, endWindow=2300, save_results = TRUE)  
+d <- filteriChart(d, minRT=300, maxRT=1800, maxfirstgap=15, maxlonggap=15, save_results = TRUE)
 d <- defineOnset(d, critonset = 300, includeAways = FALSE)
 
 ## Compute aggregate accuracy and RT 

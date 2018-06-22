@@ -5,7 +5,7 @@
 \title{Compute Statistics On iChart}
 \usage{
 computeStatistics(iChart, startWindow = 300, endWindow = 3000,
-  save_results = F)
+  save_results = TRUE)
 }
 \arguments{
 \item{iChart}{A data frame in iChart format with iChart column names.}
