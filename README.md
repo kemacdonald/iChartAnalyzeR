@@ -17,16 +17,10 @@ devtools::install_github("kemacdonald/iChartAnalyzeR")
 
 ## Usage 
 
-For detailed usage information, see the package vignette by running the following line of code 
-
-```r
-library(iChartAnalyzeR)
-vignette(topic = "iChartAnalyzer_vignette", package = 'iChartAnalyzeR')
-```
-
-The following code snippet shows how to use the basic functionality of `iChartAnalyzeR`. Note that
-for any of these functions to work, the data have to be in iChart format with the same column naming
-conventions.
+For detailed usage information, see the package vignette (TODO). 
+The following code snippet shows how to use the basic functionality of `iChartAnalyzeR`. 
+Note that for any of these functions to work, the data have to be in iChart format with 
+the same column naming conventions.
 
 ```r
 library(iChartAnalyzeR)
@@ -49,8 +43,8 @@ d_analysis <- renameCondition(d_analysis, oldCondition = "Experimental", newCond
 describeiChart(d_analysis)
 
 ## Filter out unknown words
-d_unknown <- readr::read_delim("Habla2_25_unknown_words.txt", delim = "\t")
-d_analysis <- removeUnknownWords(d_analysis, d_unknown)
+d_analysis <- removeUnknownWords(d_analysis, knownWords_file = "knows.txt", knows_threshold = 3)
+describeiChart(d_analysis)
 
 ## Compute aggregate accuracy and RT
 acc <- poolData(d_analysis,
@@ -59,7 +53,6 @@ acc <- poolData(d_analysis,
                RejectFirstGap=TRUE,
                RejectLongestGap=TRUE,
                RejectRT=FALSE,
-               paired = TRUE,
                save_results = TRUE)
 
 rt <- poolData(d_analysis,
@@ -68,7 +61,6 @@ rt <- poolData(d_analysis,
               RejectFirstGap = TRUE,
               RejectLongestGap = TRUE,
               RejectRT = TRUE,
-              paired = TRUE,
               save_results = TRUE)
 
 ## Make profile plot
