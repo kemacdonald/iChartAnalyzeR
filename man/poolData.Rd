@@ -4,9 +4,9 @@
 \alias{poolData}
 \title{Pool Data}
 \usage{
-poolData(iChart, dependent = "Accuracy", include_T_initial = FALSE,
-  RejectFirstGap = FALSE, RejectLongestGap = FALSE, RejectRT = FALSE,
-  group = "", paired = TRUE, save_results = FALSE)
+poolData(iChart, dependent = "Accuracy", include_T_initial = TRUE,
+  RejectFirstGap = TRUE, RejectLongestGap = TRUE, RejectRT = FALSE,
+  save_results = TRUE)
 }
 \arguments{
 \item{iChart}{A data frame in iChart format with iChart column names.}
@@ -20,10 +20,6 @@ poolData(iChart, dependent = "Accuracy", include_T_initial = FALSE,
 \item{RejectLongestGap}{A boolean indicating whether bad longest gaps should be filtered out of the computation.}
 
 \item{RejectRT}{A boolean indicating whether bad RTs should be filtered out of the computation.}
-
-\item{group}{A string indicating the variable name for any grouping variables (e.g., conditions).}
-
-\item{paired}{A boolean indicating whether the computation should be done over paired data.}
 
 \item{save_results}{A boolean indicating whether the results should be saved to disk.}
 }

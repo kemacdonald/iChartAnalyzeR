@@ -12,7 +12,7 @@ Install `iChartAnalyzeR` from this GitHub repository:
 
 ```r
 install.packages('devtools')
-devtools::install_github("kemacdonald/iChartAnalyzeR", build_vignettes = TRUE)
+devtools::install_github("kemacdonald/iChartAnalyzeR")
 ```
 
 ## Usage 
@@ -54,22 +54,22 @@ d_analysis <- removeUnknownWords(d_analysis, d_unknown)
 
 ## Compute aggregate accuracy and RT
 acc <- poolData(d_analysis,
-                dependent="Accuracy",
-                include_T_initial = TRUE,
-                RejectFirstGap=FALSE,
-                RejectLongestGap=FALSE,
-                RejectRT=FALSE,
-                paired = TRUE,
-                save_results = TRUE)
-
-rt <- poolData(d_analysis,
-               dependent = "RT",
-               include_T_initial = FALSE,
-               RejectFirstGap = TRUE,
-               RejectLongestGap = TRUE,
-               RejectRT = TRUE,
+               dependent="Accuracy",
+               include_T_initial = TRUE,
+               RejectFirstGap=TRUE,
+               RejectLongestGap=TRUE,
+               RejectRT=FALSE,
                paired = TRUE,
                save_results = TRUE)
+
+rt <- poolData(d_analysis,
+              dependent = "RT",
+              include_T_initial = TRUE,
+              RejectFirstGap = TRUE,
+              RejectLongestGap = TRUE,
+              RejectRT = TRUE,
+              paired = TRUE,
+              save_results = TRUE)
 
 ## Make profile plot
 createPlots(d_analysis,
