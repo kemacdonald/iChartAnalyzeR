@@ -4,20 +4,18 @@
 \alias{removeUnknownWords}
 \title{Remove Unknown Words From iChart}
 \usage{
-removeUnknownWords(iChart, df_unknown_words)
+removeUnknownWords(iChart, knownWords_file, knows_threshold = 3)
 }
 \arguments{
 \item{iChart}{A data frame created by the \code{readiChart()} function.}
 
-\item{df_unknown_words}{A data frame of unknown words for each participant that should be filtered from the analysis.}
+\item{knownWords_file}{A file with a table of unknown words for each participant}
+
+\item{knows_threshold}{An integer indicating the threshold value for whether a word is known.}
 }
 \description{
 \code{removeUnknownWords()} provides a quick way to rename conditions in an iChart
 }
 \details{
 This function removes unknown words for each participant
-}
-\examples{
-\dontrun{d <- removeUnknownWords(iChart, df_unknown_words)}
-
 }
