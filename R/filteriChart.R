@@ -7,8 +7,8 @@
 #'   the following statistics for each trial: RT, longestLook, longestGap, Gap, longestGapPosition,
 #'   NumberOfShifts, FirstFixation.
 #' @param iChart A data frame in iChart format with iChart column names.
-#' @param minRT An integer indicating the lower bound of the analysis window in milliseconds.
-#' @param maxRT An integer indicating the upper bound of the analysis window in milliseconds.
+#' @param minRT An integer indicating the lower bound of the RT analysis window in milliseconds.
+#' @param maxRT An integer indicating the upper bound of the RT analysis window in milliseconds.
 #' @param maxfirstgap An integer indicating the upper bound of the first gap shift length frames.
 #' @param maxlonggap An integer indicating the upper bound of the longest gap in a trial in frames.
 #' @param save_results A boolean indicating whether the results should be saved to disk.
@@ -18,7 +18,12 @@
 #'   maxlonggap=15, save_results = TRUE)}
 #'
 
-filteriChart <- function(iChart, minRT, maxRT, maxfirstgap, maxlonggap, save_results = FALSE) {
+filteriChart <- function(iChart, minRT, maxRT,
+                         maxfirstgap, maxlonggap,
+                         save_results = FALSE) {
+
+  iChart$StartWindowRT <- minRT
+  iChart$EndWindowRT <- maxRT
 
   high_percentileRT <- maxRT
   low_percentileRT <- minRT

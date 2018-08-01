@@ -10,9 +10,9 @@ filteriChart(iChart, minRT, maxRT, maxfirstgap, maxlonggap,
 \arguments{
 \item{iChart}{A data frame in iChart format with iChart column names.}
 
-\item{minRT}{An integer indicating the lower bound of the analysis window in milliseconds.}
+\item{minRT}{An integer indicating the lower bound of the RT analysis window in milliseconds.}
 
-\item{maxRT}{An integer indicating the upper bound of the analysis window in milliseconds.}
+\item{maxRT}{An integer indicating the upper bound of the RT analysis window in milliseconds.}
 
 \item{maxfirstgap}{An integer indicating the upper bound of the first gap shift length frames.}
 

@@ -50,15 +50,19 @@ poolData <- function(iChart,
   } else if (dependent == "RT") {
     results_table <- filterediChart %>%
       dplyr::group_by(Sub.Num, Condition, Response) %>%
-      dplyr::summarise(RT = mean(RT, na.rm = T),
-                       stdev = stats::sd(Accuracy, na.rm = T),
+      dplyr::summarise(rt = mean(RT, na.rm = T),
+                       stdev = stats::sd(RT, na.rm = T),
                        n_trials = dplyr::n()) %>%
       dplyr::filter(!is.na(Sub.Num))
   }
   ## save results
-  if(save_results) {
+  if(save_results & dependent == "Accuracy") {
     npar <- length(unique(iChart$Sub.Num))
     save_as_ta <- paste(iChart[1, "Directory"], iChart[1, "StudyName"], "_mean_", dependent, "_by_subs_", iChart[1, "StartWindowAcc"], "_", iChart[1, "EndWindowAcc"], "_n_", npar, ".txt", sep="")
+    write.table(results_table, save_as_ta, sep="\t", row.names=F)
+  } else {
+    npar <- length(unique(iChart$Sub.Num))
+    save_as_ta <- paste(iChart[1, "Directory"], iChart[1, "StudyName"], "_mean_", dependent, "_by_subs_", iChart[1, "StartWindowRT"], "_", iChart[1, "EndWindowRT"], "_n_", npar, ".txt", sep="")
     write.table(results_table, save_as_ta, sep="\t", row.names=F)
   }
   results_table

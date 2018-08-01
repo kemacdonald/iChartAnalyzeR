@@ -1,7 +1,7 @@
 # iChartAnalyzeR
 
 `iChartAnalyzeR` is a R-package that contains utility functions for
-analyzing eyetracking studies in the style of the 
+analyzing eyetracking studies in the style of the
 Language Learning Lab at Stanford University.
 
 ## Setup
@@ -15,19 +15,20 @@ install.packages('devtools')
 devtools::install_github("kemacdonald/iChartAnalyzeR")
 ```
 
-## Usage 
+## Usage
 
-For detailed usage information, see the package vignette (TODO). 
-The following code snippet shows how to use the basic functionality of `iChartAnalyzeR`. 
-Note that for any of these functions to work, the data have to be in iChart format with 
-the same column naming conventions.
+For detailed usage information, see the package vignette (TODO).
+The following code snippet shows how to use the basic functionality of `iChartAnalyzeR`.
+Note that for any of these functions to work, the data have to be in iChart format with the same column naming conventions.
 
 ```r
 library(iChartAnalyzeR)
 
 ## Read and Preprocess iChart
 d <- readiChart(iChartFile = "Habla2_25_iChart_wide.txt", sampling_rate = 17)
-d <- computeStatistics(d, startWindow=0, endWindow=2300, save_results = TRUE)
+d <- computeStatistics(d, startWindow=0, endWindow=2300,
+                       accuracyWindowStart = 300, accuracyWindowEnd = 1800,
+                       save_results = TRUE)
 d <- filteriChart(d, minRT=300, maxRT=1800, maxfirstgap=15, maxlonggap=15, save_results = TRUE)
 d <- defineOnset(d, critonset = 300, includeAways = FALSE)
 

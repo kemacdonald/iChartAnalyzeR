@@ -5,25 +5,30 @@
 \title{Compute Statistics On iChart}
 \usage{
 computeStatistics(iChart, startWindow = 300, endWindow = 3000,
+  accuracyWindowStart = 300, accuracyWindowEnd = 1800,
   save_results = TRUE)
 }
 \arguments{
 \item{iChart}{A data frame in iChart format with iChart column names.}
 
-\item{startWindow}{An integer indicating the lower bound of the analysis window in milliseconds.}
+\item{startWindow}{An integer indicating the lower bound of the cleaning window in milliseconds.}
 
-\item{endWindow}{An integer indicating the upper bound of the analysis window in milliseconds.}
+\item{endWindow}{An integer indicating the upper bound of the cleaning window in milliseconds.}
+
+\item{accuracyWindowStart}{An integer indicating the lower bound of the accuracy computation window in milliseconds.}
+
+\item{accuracyWindowEnd}{An integer indicating the upper bound of the accuracy computation window in milliseconds.}
 
 \item{save_results}{A boolean indicating whether the results should be saved to disk.}
 }
 \description{
 \code{computeStatistics()} takes two values that indicated an analysis window and computes
   the following statistics for each trial: RT, longestLook, longestGap, Gap, longestGapPosition,
-  NumberOfShifts, FirstFixation.
+  NumberOfShifts, FirstFixation, and Accuracy.
 }
 \details{
 This function computes the relevant stats on an iChart.
 }
 \examples{
-\dontrun{d <- computeStatistics(iChart, startWindow=0, endWindow=3000, save_results = TRUE)}
+\dontrun{d <- computeStatistics(iChart, startWindow=0, endWindow=3000, accuracyWindowStart = 300, accuracyWindowEnd = 1800, save_results = TRUE)}
 }
