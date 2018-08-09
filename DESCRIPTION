@@ -22,7 +22,9 @@ Imports:
     dplyr,
     magrittr,
     readr,
-    purrr
+    purrr,
+    stringr,
+    rlang
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown

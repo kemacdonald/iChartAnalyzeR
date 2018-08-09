@@ -4,6 +4,8 @@
 analyzing eyetracking studies in the style of the
 Language Learning Lab at Stanford University.
 
+⚠️ Warning: This package is early work in development and subject to potentially code-breaking changes.
+
 ## Setup
 
 ### Install iChartAnalyzeR
@@ -17,7 +19,6 @@ devtools::install_github("kemacdonald/iChartAnalyzeR")
 
 ## Usage
 
-For detailed usage information, see the package vignette (TODO).
 The following code snippet shows how to use the basic functionality of `iChartAnalyzeR`.
 Note that for any of these functions to work, the data have to be in iChart format with the same column naming conventions.
 
@@ -64,12 +65,16 @@ rt <- poolData(d_analysis,
               RejectRT = TRUE,
               save_results = TRUE)
 
-## Make profile plot
-createPlots(d_analysis,
-            plotStats="PP",
-            startWindow=300, endWindow=3000,
-            RejectLongestGap=FALSE,
-            RejectFirstGap = FALSE,
-            RejectRT = FALSE,
-            group="")
+## Generate and save graph values
+df_gvs <- generateGraphValues(d_analysis,
+                              filter_criteria = list("none"),
+                              group_cols = list("Sub.Num", "Condition"),
+                              startWindow = 0, endWindow = 3000,
+                              save_results = TRUE)
+
+## Make a Profile Plot from the graph values
+makeProfilePlot(df_gvs, startWindow = 0, endWindow = 3000, bin_width = 33)
 ```
+![](figs/pp_example.png)
+
+
