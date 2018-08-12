@@ -18,8 +18,10 @@ filterPrescreened <- function(iChart, save_results = TRUE) {
     dplyr::count(.data$Sub.Num, .data$Condition, .data$Prescreen.Notes)
 
   if(save_results) {
+    dir.create("processed_data", showWarnings = FALSE)
+    file_name <- paste(unique(iChart$StudyName), "prescreening_summary.txt", sep = '_')
     readr::write_delim(d_ps_summary,
-                       paste(unique(iChart$StudyName), "prescreening_summary.txt", sep = '_'),
+                       path = paste("processed_data/", file_name, sep = ""),
                        delim = "\t")
     print("Saved prescreening results")
   }

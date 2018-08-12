@@ -1,4 +1,4 @@
-#' Create LWL Plots
+#' Create LWL Plots (DEPRECATED)
 #'
 #' This function generates two types of plots for PEEK data: Profile Plots and Onset Contingency Plots
 #'

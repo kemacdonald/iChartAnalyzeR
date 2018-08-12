@@ -6,32 +6,32 @@
 #'   the following statistics for each trial: RT, longestLook, longestGap, Gap, longestGapPosition,
 #'   NumberOfShifts, FirstFixation, and Accuracy.
 #' @param iChart A data frame in iChart format with iChart column names.
-#' @param startWindow An integer indicating the lower bound of the cleaning window in milliseconds.
-#' @param endWindow An integer indicating the upper bound of the cleaning window in milliseconds.
+#' @param cleanWindowStart An integer indicating the lower bound of the cleaning window in milliseconds.
+#' @param cleanWindowEnd An integer indicating the upper bound of the cleaning window in milliseconds.
 #' @param accuracyWindowStart An integer indicating the lower bound of the accuracy computation window in milliseconds.
 #' @param accuracyWindowEnd An integer indicating the upper bound of the accuracy computation window in milliseconds.
 #' @param save_results A boolean indicating whether the results should be saved to disk.
 #' @export
 #' @examples
-#' \dontrun{d <- computeStatistics(iChart, startWindow=0, endWindow=3000, accuracyWindowStart = 300, accuracyWindowEnd = 1800, save_results = TRUE)}
+#' \dontrun{d <- computeStatistics(iChart, cleanWindowStart=0, cleanWindowEnd=3000, accuracyWindowStart = 300, accuracyWindowEnd = 1800, save_results = TRUE)}
 
 computeStatistics <- function(iChart,
-                              startWindow = 300, endWindow = 3000,
+                              cleanWindowStart = 300, cleanWindowEnd = 3000,
                               accuracyWindowStart = 300, accuracyWindowEnd = 1800,
                               save_results = TRUE) {
 
-  iChart$StartCleaningWindow <- rep(startWindow, nrow(iChart))
-  iChart$EndCleaningWindow <- rep(endWindow, nrow(iChart))
+  iChart$StartCleaningWindow <- rep(cleanWindowStart, nrow(iChart))
+  iChart$EndCleaningWindow <- rep(cleanWindowEnd, nrow(iChart))
 
   accuracyWindowStart <- as.character(accuracyWindowStart)
   accuracyWindowEnd <- as.character(accuracyWindowEnd)
   iChart$StartWindowAcc <- accuracyWindowStart
   iChart$EndWindowAcc <- accuracyWindowEnd
 
-  startWindow <- which(names(iChart)==startWindow)
+  cleanWindowStart <- which(names(iChart)==cleanWindowStart)
 
-  if (endWindow == FALSE) endWindow <- length(iChart)
-  else endWindow <- which(names(iChart)==endWindow)
+  if (cleanWindowEnd == FALSE) cleanWindowEnd <- length(iChart)
+  else cleanWindowEnd <- which(names(iChart)==cleanWindowEnd)
 
   iChart$longestLook <- rep(NA, nrow(iChart))
   iChart$longestGap <- rep(NA, nrow(iChart))
@@ -65,14 +65,14 @@ computeStatistics <- function(iChart,
     isFirst <- TRUE
     isShift <- TRUE
 
-    start_elem <- iChart[row, startWindow]
+    start_elem <- iChart[row, cleanWindowStart]
 
     rt_notdetected <- TRUE
-    for (col in startWindow:endWindow) {
+    for (col in cleanWindowStart:cleanWindowEnd) {
       curr_elem <- iChart[row, col]
 
       if (is.na(curr_elem) || curr_elem == ""){
-        col = endWindow
+        col = cleanWindowEnd
       } else if (curr_elem == 0.5) {
 
         currentLook <- 0
@@ -158,7 +158,7 @@ computeStatistics <- function(iChart,
 
   iChart <- dplyr::left_join(iChart, df_accuracy, by = c("Sub.Num", "Tr.Num"))
 
-  #iChart$Accuracy <- rowMeans(data.matrix(iChart[,startWindow:endWindow]), na.rm=T)
+  #iChart$Accuracy <- rowMeans(data.matrix(iChart[,cleanWindowStart:cleanWindowEnd]), na.rm=T)
 
   longestFirstGap <- max(iChart$firstGap[iChart$Response == "D" | iChart$Response == "T"], na.rm=T)
   longestLongestGap <- max(iChart$longestGap[iChart$Response == "D" | iChart$Response == "T"], na.rm=T)
@@ -167,10 +167,10 @@ computeStatistics <- function(iChart,
 
   if (save_results) {
     npar <- length(unique(iChart$Sub.Num))
-    save_as <- paste(iChart[1, "Directory"], iChart[1, "StudyName"], "_originaliChart", "_RT_",iChart[1, "StartCleaningWindow"], "_", iChart[1, "EndCleaningWindow"], "_minRT_",  shortestRT_D, "_maxRT_", longestRT_D, "_lg_", longestLongestGap, "_fg_", longestFirstGap, "_Acc_", iChart[1, "StartWindowAcc"], "_", iChart[1, "EndWindowAcc"], "_n_", npar, ".txt", sep="")
+    dir.create("processed_data", showWarnings = FALSE)
+    save_as <- paste("processed_data/", iChart[1, "StudyName"], "_originaliChart", "_RT_",iChart[1, "StartCleaningWindow"], "_", iChart[1, "EndCleaningWindow"], "_minRT_",  shortestRT_D, "_maxRT_", longestRT_D, "_lg_", longestLongestGap, "_fg_", longestFirstGap, "_Acc_", iChart[1, "StartWindowAcc"], "_", iChart[1, "EndWindowAcc"], "_n_", npar, ".txt", sep="")
     write.table(iChart, save_as, sep="\t", row.names=F)
   }
-
+  # returrn the iChart
   iChart
-
 }

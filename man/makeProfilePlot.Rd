@@ -2,28 +2,34 @@
 % Please edit documentation in R/makeProfilePlot.R
 \name{makeProfilePlot}
 \alias{makeProfilePlot}
-\title{Make Profile Plot}
+\title{Make a Profile Plot}
 \usage{
-makeProfilePlot(df_gvs, startWindow, endWindow, bin_width = 17)
+makeProfilePlot(df_gvs, plotStartWindow = 0, plotEndWindow = 3000,
+  sample_rate = 17, smoothing_factor = 5, save_results = TRUE)
 }
 \arguments{
-\item{df_gvs}{A data frame of graph values created by the \code{generateGraphValues()} function.}
+\item{df_gvs}{A data frame of graph values created by the \code{generatePPgraphValues()} function.}
 
-\item{startWindow}{An integer indicating the lower bound of the plotting window in milliseconds.}
+\item{plotStartWindow}{An integer indicating the lower bound of the plotting window in milliseconds.}
 
-\item{endWindow}{An integer indicating the upper bound of the plotting window in milliseconds.}
+\item{plotEndWindow}{An integer indicating the upper bound of the plotting window in milliseconds.}
 
-\item{bin_width}{An integer indicating the sampling rate or smoothing rate for the plot. Values
-currently supported include 17 or 33 ms.}
+\item{sample_rate}{An integer indicating the sampling rate of the eye tracker in milliseconds (likely 17 or 33 ms).}
+
+\item{smoothing_factor}{An integer controlling the number of data points that are displayed on the Profile Plot.
+Higher values display fewer data points. A value of 1 shows all data points.}
+
+\item{save_results}{A boolean indicating whether the results should be saved to disk.}
 }
 \description{
 \code{makeProfilePlot()} creates a profile plot
 }
 \details{
-This function takes graph values and generates a profile plot (proportion looking to target as a function of
-time).
+This function takes graph values and generates a profile plot: proportion looking to target as a function of
+time.
 }
 \examples{
-\dontrun{makeProfilePlot(df_gvs, startWindow = 0, endWindow = 3000, bin_width = 17)}
+\dontrun{makeProfilePlot(df_gvs, plotStartWindow = 0, plotEndWindow = 3000, sample_rate = 17, smoothing_factor = 6,
+  save_results = TRUE)}
 
 }

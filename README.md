@@ -25,13 +25,17 @@ Note that for any of these functions to work, the data have to be in iChart form
 ```r
 library(iChartAnalyzeR)
 
+## Set the working directory to wherever the iChart is stored on your local machine or server
+setwd("~/Desktop/tobii_to_ichart_test/test_Rscripts/")
+
 ## Read and Preprocess iChart
 d <- readiChart(iChartFile = "Habla2_25_iChart_wide.txt", sampling_rate = 17)
-d <- computeStatistics(d, startWindow=0, endWindow=2300,
+d <- computeStatistics(d, cleanWindowStart = 0, cleanWindowEnd = 2300,
                        accuracyWindowStart = 300, accuracyWindowEnd = 1800,
                        save_results = TRUE)
-d <- filteriChart(d, minRT=300, maxRT=1800, maxfirstgap=15, maxlonggap=15, save_results = TRUE)
+d <- filteriChart(d, minRT = 300, maxRT = 1800, maxfirstgap = 15, maxlonggap = 15, save_results = TRUE)
 d <- defineOnset(d, critonset = 300, includeAways = FALSE)
+
 
 ## Describe the iChart
 describeiChart(d)
@@ -65,16 +69,34 @@ rt <- poolData(d_analysis,
               RejectRT = TRUE,
               save_results = TRUE)
 
-## Generate and save graph values
-df_gvs <- generateGraphValues(d_analysis,
-                              filter_criteria = list("none"),
-                              group_cols = list("Sub.Num", "Condition"),
-                              startWindow = 0, endWindow = 3000,
-                              save_results = TRUE)
+## Generate and save graph values for Profile Plot
+pp_gvs <- generatePPgraphValues(d_analysis,
+                                filter_criteria = list('GoodFirstGap', 'GoodLongestGap'),
+                                group_cols = list("Condition"),
+                                gvStartWindow = 0, gvEndWindow = 3000,
+                                save_results = F)
 
 ## Make a Profile Plot from the graph values
-makeProfilePlot(df_gvs, startWindow = 0, endWindow = 3000, bin_width = 33)
+makeProfilePlot(pp_gvs, plotStartWindow = 0, plotEndWindow = 2300, smoothing_factor = 5,
+                save_results = TRUE)
+                
 ```
+
 ![](figs/pp_example.png)
 
+```r
+
+## Generate and save graph values for Onset Contingency Plot
+oc_gvs <- generateOCgraphValues(d_analysis,
+                                filter_criteria = list('GoodFirstGap', 'GoodLongestGap'),
+                                group_cols = list("Condition"),
+                                gvStartWindow = 0, gvEndWindow = 3000,
+                                save_results = TRUE)
+
+## Make Onset Contingency Plot
+makeOCplot(oc_gvs, plotStartWindow = 0, plotEndWindow = 1800, smoothing_factor = 5,
+           save_results = TRUE)
+```
+
+![](figs/oc_example.png)
 

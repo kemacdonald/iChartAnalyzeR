@@ -18,9 +18,10 @@
 #'   maxlonggap=15, save_results = TRUE)}
 #'
 
-filteriChart <- function(iChart, minRT, maxRT,
+filteriChart <- function(iChart,
+                         minRT, maxRT,
                          maxfirstgap, maxlonggap,
-                         save_results = FALSE) {
+                         save_results = TRUE) {
 
   iChart$StartWindowRT <- minRT
   iChart$EndWindowRT <- maxRT
@@ -31,7 +32,8 @@ filteriChart <- function(iChart, minRT, maxRT,
   percentileLongestGap <- maxlonggap
 
   if(save_results) {
-    save_as <- paste(iChart[1, "Directory"], iChart[1, "StudyName"], "_filtering_Criteria.txt", sep="")
+    dir.create("processed_data", showWarnings = FALSE)
+    save_as <- paste("processed_data/", iChart[1, "StudyName"], "_filtering_Criteria.txt", sep="")
     sink(paste(save_as, sep=""))
   }
 
@@ -121,7 +123,8 @@ filteriChart <- function(iChart, minRT, maxRT,
   if(save_results) {
     sink()
     npar <- length(unique(iChart$Sub.Num))
-    save_as <- paste(iChart[1, "Directory"], iChart[1, "StudyName"], "_filterediChart", "_RT_",iChart[1, "StartWindowRT"], "_", iChart[1, "EndWindowRT"], "_minRT_",  shortestRT_D, "_maxRT_", longestRT_D, "_lg_", longestLongestGap, "_fg_", longestFirstGap, "_Acc_", iChart[1, "StartWindowAcc"], "_", iChart[1, "EndWindowAcc"], "_n_", npar, ".txt", sep="")
+    dir.create("processed_data", showWarnings = FALSE)
+    save_as <- paste("processed_data/", iChart[1, "StudyName"], "_filterediChart", "_RT_",iChart[1, "StartWindowRT"], "_", iChart[1, "EndWindowRT"], "_minRT_",  shortestRT_D, "_maxRT_", longestRT_D, "_lg_", longestLongestGap, "_fg_", longestFirstGap, "_Acc_", iChart[1, "StartWindowAcc"], "_", iChart[1, "EndWindowAcc"], "_n_", npar, ".txt", sep="")
     write.table(iChart, save_as, sep="\t", row.names=F)
   }
   iChart

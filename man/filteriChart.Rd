@@ -5,7 +5,7 @@
 \title{Filter iChart}
 \usage{
 filteriChart(iChart, minRT, maxRT, maxfirstgap, maxlonggap,
-  save_results = FALSE)
+  save_results = TRUE)
 }
 \arguments{
 \item{iChart}{A data frame in iChart format with iChart column names.}

@@ -58,11 +58,13 @@ poolData <- function(iChart,
   ## save results
   if(save_results & dependent == "Accuracy") {
     npar <- length(unique(iChart$Sub.Num))
-    save_as_ta <- paste(iChart[1, "Directory"], iChart[1, "StudyName"], "_mean_", dependent, "_by_subs_", iChart[1, "StartWindowAcc"], "_", iChart[1, "EndWindowAcc"], "_n_", npar, ".txt", sep="")
+    dir.create("processed_data", showWarnings = FALSE)
+    save_as_ta <- paste("processed_data/", iChart[1, "StudyName"], "_mean_", dependent, "_by_subs_", iChart[1, "StartWindowAcc"], "_", iChart[1, "EndWindowAcc"], "_n_", npar, ".txt", sep="")
     write.table(results_table, save_as_ta, sep="\t", row.names=F)
   } else {
     npar <- length(unique(iChart$Sub.Num))
-    save_as_ta <- paste(iChart[1, "Directory"], iChart[1, "StudyName"], "_mean_", dependent, "_by_subs_", iChart[1, "StartWindowRT"], "_", iChart[1, "EndWindowRT"], "_n_", npar, ".txt", sep="")
+    dir.create("processed_data", showWarnings = FALSE)
+    save_as_ta <- paste("processed_data/", iChart[1, "StudyName"], "_mean_", dependent, "_by_subs_", iChart[1, "StartWindowRT"], "_", iChart[1, "EndWindowRT"], "_n_", npar, ".txt", sep="")
     write.table(results_table, save_as_ta, sep="\t", row.names=F)
   }
   results_table

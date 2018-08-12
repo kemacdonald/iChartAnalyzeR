@@ -2,7 +2,7 @@
 % Please edit documentation in R/createPlots.R
 \name{createPlots}
 \alias{createPlots}
-\title{Create LWL Plots}
+\title{Create LWL Plots (DEPRECATED)}
 \usage{
 createPlots(iChart, startWindow, endWindow, RejectLongestGap, RejectFirstGap,
   RejectRT, plotStats = "PP", group = "", ...)

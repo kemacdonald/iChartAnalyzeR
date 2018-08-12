@@ -4,16 +4,16 @@
 \alias{computeStatistics}
 \title{Compute Statistics On iChart}
 \usage{
-computeStatistics(iChart, startWindow = 300, endWindow = 3000,
+computeStatistics(iChart, cleanWindowStart = 300, cleanWindowEnd = 3000,
   accuracyWindowStart = 300, accuracyWindowEnd = 1800,
   save_results = TRUE)
 }
 \arguments{
 \item{iChart}{A data frame in iChart format with iChart column names.}
 
-\item{startWindow}{An integer indicating the lower bound of the cleaning window in milliseconds.}
+\item{cleanWindowStart}{An integer indicating the lower bound of the cleaning window in milliseconds.}
 
-\item{endWindow}{An integer indicating the upper bound of the cleaning window in milliseconds.}
+\item{cleanWindowEnd}{An integer indicating the upper bound of the cleaning window in milliseconds.}
 
 \item{accuracyWindowStart}{An integer indicating the lower bound of the accuracy computation window in milliseconds.}
 
@@ -30,5 +30,5 @@ computeStatistics(iChart, startWindow = 300, endWindow = 3000,
 This function computes the relevant stats on an iChart.
 }
 \examples{
-\dontrun{d <- computeStatistics(iChart, startWindow=0, endWindow=3000, accuracyWindowStart = 300, accuracyWindowEnd = 1800, save_results = TRUE)}
+\dontrun{d <- computeStatistics(iChart, cleanWindowStart=0, cleanWindowEnd=3000, accuracyWindowStart = 300, accuracyWindowEnd = 1800, save_results = TRUE)}
 }
