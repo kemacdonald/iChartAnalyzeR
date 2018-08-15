@@ -13,9 +13,10 @@
 renameCondition <- function(iChart, oldCondition, newCondition) {
   d_new_condition <- iChart %>%
     dplyr::mutate(Condition = ifelse(Condition == oldCondition,
-                              newCondition,
-                              oldCondition))
-  print(paste("The conditions in the iChart are: ", unique(d_new_condition$Condition)))
+                                     newCondition,
+                                     Condition))
+
+  message("renaming conditions in iChart")
 
   d_new_condition
 }
