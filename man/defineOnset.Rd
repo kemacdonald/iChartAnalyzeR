@@ -4,7 +4,7 @@
 \alias{defineOnset}
 \title{Define Onsets For iChart}
 \usage{
-defineOnset(iChart, critonset, includeAways = FALSE)
+defineOnset(iChart, critonset = 0, includeAways = FALSE)
 }
 \arguments{
 \item{iChart}{A data frame in iChart format with iChart column names.}
@@ -22,5 +22,5 @@ This function defines the type of trial (D-, T-, or A-initial) based on a user-s
 critical onset value.
 }
 \examples{
-\dontrun{d <- defineOnset(iChart, critonset = 300, includeAways = FALSE)}
+\dontrun{d <- defineOnset(iChart, critonset = 0, includeAways = FALSE)}
 }

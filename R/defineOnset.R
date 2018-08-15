@@ -10,10 +10,10 @@
 #' @param includeAways A boolean indicating whether Away responses should be inlcluded.
 #' @export
 #' @examples
-#' \dontrun{d <- defineOnset(iChart, critonset = 300, includeAways = FALSE)}
+#' \dontrun{d <- defineOnset(iChart, critonset = 0, includeAways = FALSE)}
 
 
-defineOnset <- function(iChart, critonset, includeAways = FALSE) {
+defineOnset <- function(iChart, critonset = 0, includeAways = FALSE) {
   F0 <- critonset
   F0 <- which(names(iChart)==F0)
   iChart$Response <- ifelse(iChart[,F0] == "1", "T", ifelse(iChart[,F0] == "0", "D", "A"))
