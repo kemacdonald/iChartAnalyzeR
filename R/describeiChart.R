@@ -14,15 +14,16 @@ describeiChart <- function(iChart) {
   d_ps <- iChart %>%
     dplyr::filter(Prescreen.Notes != "good_trial") %>%
     dplyr::count(Sub.Num, Condition) %>%
-    dplyr::rename(n_trials_prescreened = n)
+    dplyr::rename(n_trials_prescreened = n) %>%
+    tidyr::complete(Sub.Num, Condition, fill = list(n_trials_prescreened = 0))
 
   if(nrow(d_ps) == 0) {
-    print("There are no trials to prescreen out, returning trial counts for each participant and condition")
+    message("There are no trials to prescreen out, returning trial counts for each participant and condition")
     iChart %>%
       dplyr::count(Sub.Num, Condition) %>%
       dplyr::rename(n_trials = n)
   } else {
-    print("There are prescreened out trials in the dataset, returning trial counts with prescreening information for each participant and condition")
+    message("There are prescreened out trials in the dataset, returning trial counts with prescreening information for each participant and condition")
     iChart %>%
       dplyr::count(Sub.Num, Condition) %>%
       dplyr::left_join(d_ps, by = c("Sub.Num", "Condition")) %>%
