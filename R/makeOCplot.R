@@ -44,21 +44,21 @@ makeOCplot <- function(df_gvs,
   plot_vals <- d_long %>%
     dplyr::filter(statistic == "mean") %>%
     dplyr::left_join(d_se) %>%
-    dplyr::group_by(time_bin, Response) %>%
+    dplyr::group_by(time_bin, Response, Condition) %>%
     dplyr::summarise(m = mean(m),
                      se = mean(se))
 
   # extract the number of time bins
   n_time_bins <- plot_vals %>%
     dplyr::ungroup() %>%
-    dplyr::select(Response) %>%
-    dplyr::count(Response) %>%
+    dplyr::select(Response, Condition) %>%
+    dplyr::count(Response, Condition) %>%
     dplyr::pull(n) %>%
     unique()
 
   # create clean time variable for x-axis
   plot_vals <- plot_vals %>%
-    dplyr::group_by(Response) %>%
+    dplyr::group_by(Response, Condition) %>%
     dplyr::mutate(time_ms = seq.int(plotStartWindow, plotEndWindow, length.out = n_time_bins) %>% round()) %>%
     dplyr::ungroup()
 
@@ -76,8 +76,10 @@ makeOCplot <- function(df_gvs,
     ggplot2::geom_hline(yintercept = 0.5, lty = "dashed") +
     ggplot2::lims(y = c(-0.05, 1.05)) +
     ggplot2::labs(x = "time (ms)", y = "prop. looking", color = "onset type") +
-    ggplot2::theme_classic() +
-    ggplot2::scale_color_manual(values = c("dodgerblue", "darkorange"))
+    ggplot2::scale_color_manual(values = c("dodgerblue", "darkorange")) +
+    ggplot2::facet_wrap(~Condition) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(panel.border = ggplot2::element_rect(colour = "grey", fill=NA, size=1))
 
   if(save_results) {
     dir.create("plots", showWarnings = FALSE)

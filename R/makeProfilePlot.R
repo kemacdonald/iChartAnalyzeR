@@ -68,14 +68,15 @@ makeProfilePlot <- function(df_gvs,
 
   # make plot
   final_plot <- plot_vals %>%
-    ggplot2::ggplot(ggplot2::aes(x = time_ms, y = m)) +
-    ggplot2::geom_line(group = 1) +
+    ggplot2::ggplot(ggplot2::aes(x = time_ms, y = m, color = Condition, group = Condition)) +
+    ggplot2::geom_line() +
     ggplot2::geom_pointrange(ggplot2::aes(ymin = m - se, ymax = m + se),
                              data = dplyr::filter(plot_vals, time_ms %in% breaks)) +
     ggplot2::geom_hline(yintercept = 0.5, lty = "dashed") +
     ggplot2::lims(y = c(-0.05, 1.05)) +
     ggplot2::labs(x = "time (ms)", y = "prop. looking") +
-    ggplot2::theme_classic()
+    ggplot2::theme_minimal() +
+    ggplot2::theme(panel.border = ggplot2::element_rect(colour = "grey", fill=NA, size=1))
 
   if(save_results) {
     dir.create("plots", showWarnings = FALSE)
