@@ -33,7 +33,7 @@ d <- readiChart(iChartFile = "Habla2_25_iChart_wide.txt", sampling_rate = 17)
 d <- computeStatistics(d, cleanWindowStart = 0, cleanWindowEnd = 2300,
                        accuracyWindowStart = 300, accuracyWindowEnd = 1800,
                        save_results = TRUE)
-d <- filteriChart(d, minRT = 300, maxRT = 1800, maxfirstgap = 15, maxlonggap = 15, save_results = TRUE)
+d <- filteriChart(d, minRT = 300, maxRT = 1800, maxfirstgap = 30, maxlonggap = 30, save_results = TRUE)
 d <- defineOnset(d, critonset = 0, includeAways = FALSE)
 
 ## Describe the iChart

@@ -4,7 +4,7 @@
 \alias{filteriChart}
 \title{Filter iChart}
 \usage{
-filteriChart(iChart, minRT, maxRT, maxfirstgap, maxlonggap,
+filteriChart(iChart, minRT, maxRT, maxfirstgap = 30, maxlonggap = 30,
   save_results = TRUE)
 }
 \arguments{
@@ -30,7 +30,7 @@ This function creates variables that can be used to
 filter trials out of the iChart based on user-specified exlcusionary criteria.
 }
 \examples{
-\dontrun{d <- filteriChart(iChart, minRT=300, maxRT=1800, maxfirstgap=15,
-  maxlonggap=15, save_results = TRUE)}
+\dontrun{d <- filteriChart(iChart, minRT=300, maxRT=1800, maxfirstgap=30,
+  maxlonggap=30, save_results = TRUE)}
 
 }

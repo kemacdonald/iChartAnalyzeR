@@ -14,13 +14,14 @@
 #' @param save_results A boolean indicating whether the results should be saved to disk.
 #' @export
 #' @examples
-#' \dontrun{d <- filteriChart(iChart, minRT=300, maxRT=1800, maxfirstgap=15,
-#'   maxlonggap=15, save_results = TRUE)}
+#' \dontrun{d <- filteriChart(iChart, minRT=300, maxRT=1800, maxfirstgap=30,
+#'   maxlonggap=30, save_results = TRUE)}
 #'
 
 filteriChart <- function(iChart,
                          minRT, maxRT,
-                         maxfirstgap, maxlonggap,
+                         maxfirstgap = 30,
+                         maxlonggap = 30,
                          save_results = TRUE) {
 
   iChart$StartWindowRT <- minRT
